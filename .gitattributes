@@ -1,6 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-
 # Collapse Unity-generated files on GitHub
 *.asset linguist-generated
 *.mat linguist-generated
