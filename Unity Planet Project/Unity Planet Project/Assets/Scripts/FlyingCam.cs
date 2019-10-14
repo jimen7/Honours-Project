@@ -65,6 +65,13 @@ public class FlyingCam : MonoBehaviour
 
     }
 
+    public void SetSysOverview(Transform p)
+    {
+        zoomBy = new Vector3(0,0,0);    //Reset zoom values
+        currView = p;
+        planetName.text = "";
+    }
+
     public void SetRandomPlanetView()
     {
         Transform temp = null;
