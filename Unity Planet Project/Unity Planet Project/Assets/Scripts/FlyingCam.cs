@@ -61,8 +61,15 @@ public class FlyingCam : MonoBehaviour
     {
         zoomBy = new Vector3(0,0,0);    //Reset zoom values
         currView = p;
-        planetName.text = currView.parent.GetChild(0).name; //camera is 2nd child of planet container, so we want the first child which is the planet
 
+        for (int i = 0; i < currView.parent.childCount;i++)
+            {
+                if (currView.parent.GetChild(i).GetComponent<Planet>()!=null)
+                {
+                    planetName.text = currView.parent.GetChild(i).name;
+                    break;
+                }
+            }
     }
 
     public void SetSysOverview(Transform p)
@@ -87,7 +94,7 @@ public class FlyingCam : MonoBehaviour
 
         if (currView.gameObject.Equals(temp.gameObject))
         {
-            SetRandomPlanetView();
+            SetRandomPlanetView(); 
         }
         else
         {
@@ -99,7 +106,17 @@ public class FlyingCam : MonoBehaviour
             // {
             //     if ()
             // }
-            planetName.text = currView.parent.GetChild(0).name; //camera is 2nd child of planet container, so we want the first child which is the planet
+
+            for (int i = 0; i < currView.parent.childCount;i++)
+            {
+                if (currView.parent.GetChild(i).GetComponent<Planet>()!=null)
+                {
+                    planetName.text = currView.parent.GetChild(i).name;
+                    break;
+                }
+            }
+
+           // planetName.text = currView.parent.GetChild(0).name; //camera is 2nd child of planet container, so we want the first child which is the planet
 
         }
     }
