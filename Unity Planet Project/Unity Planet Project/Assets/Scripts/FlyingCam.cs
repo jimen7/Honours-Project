@@ -45,7 +45,7 @@ public class FlyingCam : MonoBehaviour
              float X = R * Mathf.Sin(PosX) * Mathf.Cos(PosY);                    //Calculate new coords
              float Z = R * Mathf.Sin(PosX) * Mathf.Sin(PosY);                    //^
              float Y = R * Mathf.Cos(PosX);                                      //^
-             zoomBy = zoomBy + new Vector3(X,0,0);
+             zoomBy = zoomBy + new Vector3(X,Y,Z);
             //  float CamX = Camera.main.transform.position.x;                      //Get current camera postition for the offset
             //  float CamY = Camera.main.transform.position.y;                      //^
             //  float CamZ = Camera.main.transform.position.z;                      //^

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Presets;
 using UnityEngine;
 
 public class RandomGeneration : MonoBehaviour
@@ -10,6 +11,14 @@ public class RandomGeneration : MonoBehaviour
 
     ShapeSettings shapeSettings;
     ColorSettings colorSettings;
+
+    [HideInInspector]
+    Preset currentPreset;        
+    
+
+
+
+
 
     NoiseSettings simpleNoiseSettings;
     NoiseSettings rigidNoiseSettings;
@@ -22,6 +31,8 @@ public class RandomGeneration : MonoBehaviour
 
     [Range(1, 8)]
     public int LODValue = 1;
+
+    Material currentMaterial;   //Need to get the current material to apply it to the 
 
     [Header("X is minimum, Y is max")]
     Vector2 planetRadius = new Vector2(1.0f, 4.0f);
@@ -51,6 +62,7 @@ public class RandomGeneration : MonoBehaviour
         planet = GetComponent<Planet>();
         shapeSettings = planet.shapeSettings;
         colorSettings = planet.colorSettings;
+        currentMaterial = planet.colorSettings.planetMaterial;
         simpleNoiseSettings = shapeSettings.noiseLayers[0].noiseSettings;
         rigidNoiseSettings = shapeSettings.noiseLayers[1].noiseSettings;
 
@@ -81,17 +93,38 @@ public class RandomGeneration : MonoBehaviour
         
 
         planet.resolution = 256;
+        RandomiseColors();
+        planet.colorSettings.planetMaterial = currentMaterial;
         planet.GeneratePlanet();
 
 
-        
+
+    }
+
+    [SerializeField]
+    Preset[] colorPresets;
+
+    public void RandomiseColors()
+    {
+        currentPreset = colorPresets[Random.Range(0,colorPresets.Length)];
+
+        currentPreset.ApplyTo(colorSettings);
 
 
+        // if (currentPreset!=colorSettings)
+        // {
+        //    currentPreset.ApplyTo(colorSettings);
+        // }
+        // else
+        // {
+        //     RandomiseColors();
+        // }
     }
 
     // Update is called once per frame
     void Update()
     {
+
 
     }
 }

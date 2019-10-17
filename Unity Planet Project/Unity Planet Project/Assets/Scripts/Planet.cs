@@ -9,7 +9,7 @@ public class Planet : MonoBehaviour
     public int resolution = 10;
 
     public bool autoUpdate = true;
-    public enum FaceRenderMask {All, Top, Bottom, Left, Right, Front, Back};
+    public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
     public FaceRenderMask faceRenderMask;
 
 
@@ -35,7 +35,7 @@ public class Planet : MonoBehaviour
     //     GeneratePlanet();
     // }
 
-        // Start is called before the first frame update, added to fix black planet issue, because the texture that we created while in edit mode is lost
+    // Start is called before the first frame update, added to fix black planet issue, because the texture that we created while in edit mode is lost
     void Start()
     {
         GeneratePlanet();
@@ -63,14 +63,14 @@ public class Planet : MonoBehaviour
                 //meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));    //Before using l8ghteweight RP material
                 meshObj.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
-                meshFilters[i].sharedMesh = new Mesh();
-               meshFilters[i].mesh = new Mesh();
+                //meshFilters[i].sharedMesh = new Mesh();
+                meshFilters[i].mesh = new Mesh();
             }
             // ORIGINAL meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial; //Making sure planet material gets assigned to then planet mesh
-            meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial; //Making sure planet material gets assigned to then planet mesh  //ERROR LINE,LEAKINMG MESH
+            meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial; //Making sure planet material gets assigned to then planet mesh  
 
             // ORIGINAL terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
-            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].mesh, resolution, directions[i]);
+            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].mesh, resolution, directions[i]);  //ERROR LINE,LEAKINMG MESH
             bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i; //So we can render one face at a time
             meshFilters[i].gameObject.SetActive(renderFace);
         }
@@ -103,11 +103,11 @@ public class Planet : MonoBehaviour
 
     void GenerateMesh()
     {
-        for (int i = 0; i <6; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (meshFilters[i].gameObject.activeSelf)
             {
-               terrainFaces[i].ConstructMesh(); 
+                terrainFaces[i].ConstructMesh();
             }
         }
 
@@ -118,11 +118,11 @@ public class Planet : MonoBehaviour
     {
         colorGenerator.UpdateColors();
 
-         for (int i = 0; i <6; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (meshFilters[i].gameObject.activeSelf)
             {
-               terrainFaces[i].UpdateUVs(colorGenerator); 
+                terrainFaces[i].UpdateUVs(colorGenerator);
             }
         }
 
