@@ -79,9 +79,10 @@ public class RandomGeneration : MonoBehaviour
         rigidNoiseSettings.rigidNoiseSettings.minValue = Random.Range(r_MinimalValue.x, r_MinimalValue.y);
 
         
-        planet.resolution = 256;
 
+        planet.resolution = 256;
         planet.GeneratePlanet();
+
 
         
 
