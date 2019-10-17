@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 12321, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Preset Library
   m_EditorClassIdentifier: 
-  m_Presets: []
+  m_Presets:
+  - m_Name: Earth
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 0.16487184, g: 0.42242643, b: 0.6132076, a: 1}
+      key1: {r: 0.7075472, g: 0.6930369, b: 0.39716092, a: 1}
+      key2: {r: 0.3637593, g: 0.6509434, b: 0.26099145, a: 0}
+      key3: {r: 0.08254716, g: 0.5, b: 0.09865097, a: 0}
+      key4: {r: 0.22312121, g: 0.5377358, b: 0.109069064, a: 0}
+      key5: {r: 0.6698113, g: 0.4447145, b: 0.23696156, a: 0}
+      key6: {r: 0.5377358, g: 0.4356421, b: 0, a: 0}
+      key7: {r: 0.3207547, g: 0.1701421, b: 0.04690281, a: 0}
+      ctime0: 0
+      ctime1: 5337
+      ctime2: 11047
+      ctime3: 26189
+      ctime4: 35870
+      ctime5: 38973
+      ctime6: 47031
+      ctime7: 65535
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 8
+      m_NumAlphaKeys: 2
