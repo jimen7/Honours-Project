@@ -6,14 +6,21 @@ using UnityEngine.UI;
 public class FlyingCam : MonoBehaviour
 {
 
+
     float ScrollWheelChange;
     Vector3 zoomBy = new Vector3(0f,0f,0f);
+
+    public ParticleSystem[] particles;
+
+    bool particlesEnabled = false;
 
     public Text planetName;
 
     Transform currView; //Current transform info of the object the cameara should be facing at 
 
     public Transform[] cameraPoint;
+
+    Transform systemOverviewLocation;
 
     float speedFactor = 0.03f;   //linear speed of camera
     float angleFactor = 0.03f;    //Spherical interpolation of the camera compared to obkect it faces 
@@ -22,6 +29,13 @@ public class FlyingCam : MonoBehaviour
     void Start()
     {
         currView = transform;
+
+        foreach (ParticleSystem p in particles)
+        {
+            p.Stop();
+        }
+
+        systemOverviewLocation = GameObject.Find("System Overview").transform;
 
 
     }
@@ -121,6 +135,47 @@ public class FlyingCam : MonoBehaviour
         }
     }
 
+    public void ChangePartcileBolean()
+    {
+        particlesEnabled = !particlesEnabled;
+    }
 
+    public void Hyperdrive()
+    {
+       if (!particlesEnabled)
+       {
+           //Camera.main.GetComponent<Skybox>().enabled = false;
+           foreach (ParticleSystem p in particles)
+           {
+               p.Play();
+               p.playbackSpeed = 1f;
+           }
+           ChangePartcileBolean();
+          // yield return new WaitForSeconds(2);
+           //Camera.main.clearFlags = CameraClearFlags.SolidColor;
+           StartCoroutine(ChangeBackground(CameraClearFlags.SolidColor));
+       }
+       else
+       {
+           //Camera.main.GetComponent<Skybox>().enabled = true;
+           foreach (ParticleSystem p in particles)
+           {
+               p.Stop();
+//               Camera.main.GetComponent<Skybox>().enabled = true;
+           }
+           currView = systemOverviewLocation;
+          // currView.position = Vector3.Lerp(transform.position, systemOverviewLocation.position, speedFactor);
+           ChangePartcileBolean();
+          // yield return new WaitForSeconds(2);
+           Camera.main.clearFlags = CameraClearFlags.Skybox;
+          // StartCoroutine(ChangeBackground(CameraClearFlags.Skybox));
+       }
+    }
+
+    IEnumerator ChangeBackground(CameraClearFlags v)
+    {
+        yield return new WaitForSeconds(1.5f);
+        Camera.main.clearFlags = v;
+    }
 
 }

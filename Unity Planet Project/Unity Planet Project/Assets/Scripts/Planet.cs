@@ -41,7 +41,7 @@ public class Planet : MonoBehaviour
         GeneratePlanet();
     }
 
-    void Initialize()
+    void Initialize()       ///NNEED TO CHNAGE IT ON MAKING
     {
         shapeGenerator.UpdateSettings(shapeSettings);
         colorGenerator.UpdateSettings(colorSettings);

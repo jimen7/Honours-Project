@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34078791ca3a87429596f1462ec0a59, type: 3}
   m_Name: Shape (1)
   m_EditorClassIdentifier: 
-  planetRadius: 1.5175759
+  planetRadius: 1.1639684
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 0.021734096
+        strength: 0.0835709
         numLayers: 4
-        baseRoughness: 2.66
-        roughness: 3.03
+        baseRoughness: 1.9564153
+        roughness: 2.6810322
         persistence: 0.58
-        centre: {x: 4.8052216, y: 6.7017307, z: 1.6375709}
+        centre: {x: 3.711915, y: 10.653387, z: 19.995743}
         minValue: 1.01
       rigidNoiseSettings:
         strength: 1
@@ -48,14 +48,14 @@ MonoBehaviour:
         centre: {x: 0, y: 0, z: 0}
         minValue: 0
       rigidNoiseSettings:
-        strength: 0.6458431
+        strength: 0.88879716
         numLayers: 4
-        baseRoughness: 2.9005647
-        roughness: 0.49315938
-        persistence: 0.6522009
-        centre: {x: 16.937363, y: 5.3263273, z: 4.825852}
-        minValue: 0.052227378
-        weightMultiplier: 1.8109697
+        baseRoughness: 2.4362104
+        roughness: 1.0712742
+        persistence: 0.7417781
+        centre: {x: 16.482536, y: 18.720737, z: 1.5180874}
+        minValue: 0.76170146
+        weightMultiplier: 2.3357852
   - enabled: 1
     useFirstLayerAsMask: 1
     noiseSettings:
