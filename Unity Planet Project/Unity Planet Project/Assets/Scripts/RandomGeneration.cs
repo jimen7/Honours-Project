@@ -8,12 +8,16 @@ public class RandomGeneration : MonoBehaviour
 
     [HideInInspector()]
     public Planet planet;
+    public Planet planetCopy;
 
     ShapeSettings shapeSettings;
     ColorSettings colorSettings;
 
     [HideInInspector]
     Preset currentPreset;        
+
+
+    bool checkIfPlanetsAreDone = false;
     
 
 
@@ -60,6 +64,7 @@ public class RandomGeneration : MonoBehaviour
     void Start()
     {
         planet = GetComponent<Planet>();
+        planetCopy = planet;
         shapeSettings = planet.shapeSettings;
         colorSettings = planet.colorSettings;
         currentMaterial = planet.colorSettings.planetMaterial;
@@ -95,9 +100,11 @@ public class RandomGeneration : MonoBehaviour
         planet.resolution = 256;
         RandomiseColors();
         planet.colorSettings.planetMaterial = currentMaterial;
-        planet.GeneratePlanet();
+        planet.StartCoroutine("MeshCoper");
+       // planet.MeshCoper();
+        //planet.GeneratePlanet();
 
-
+        checkIfPlanetsAreDone = true;
 
     }
 
@@ -119,6 +126,16 @@ public class RandomGeneration : MonoBehaviour
         // {
         //     RandomiseColors();
         // }
+    }
+
+    public IEnumerator RandomiseInBackground()
+    {
+        RandomisePlanet();
+ 
+        yield return new WaitForSeconds(5f);
+
+        
+        
     }
 
     // Update is called once per frame

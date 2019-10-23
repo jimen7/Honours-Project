@@ -133,4 +133,10 @@ public class Planet : MonoBehaviour
         // }
     }
 
+    public IEnumerator MeshCoper()
+    {
+        GeneratePlanet();
+        yield return null;
+    }
+
 }
