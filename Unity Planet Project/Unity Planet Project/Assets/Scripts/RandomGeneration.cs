@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Presets;
 using UnityEngine;
 
 public class RandomGeneration : MonoBehaviour
@@ -8,19 +7,20 @@ public class RandomGeneration : MonoBehaviour
 
     [HideInInspector()]
     public Planet planet;
-    public Planet planetCopy;
 
     ShapeSettings shapeSettings;
     ColorSettings colorSettings;
 
-    [HideInInspector]
-    Preset currentPreset;        
-
 
     bool checkIfPlanetsAreDone = false;
-    
 
 
+    public GradientLibrary terrain;
+    public GradientLibrary ocean;
+
+
+    Gradient currentTerrain;
+    Gradient currentOcean;
 
 
 
@@ -34,9 +34,7 @@ public class RandomGeneration : MonoBehaviour
 
 
     [Range(1, 8)]
-    public int LODValue = 1;
-
-    Material currentMaterial;   //Need to get the current material to apply it to the 
+    public int LODValue = 1; 
 
     [Header("X is minimum, Y is max")]
     Vector2 planetRadius = new Vector2(1.0f, 4.0f);
@@ -64,10 +62,8 @@ public class RandomGeneration : MonoBehaviour
     void Start()
     {
         planet = GetComponent<Planet>();
-        planetCopy = planet;
         shapeSettings = planet.shapeSettings;
         colorSettings = planet.colorSettings;
-        currentMaterial = planet.colorSettings.planetMaterial;
         simpleNoiseSettings = shapeSettings.noiseLayers[0].noiseSettings;
         rigidNoiseSettings = shapeSettings.noiseLayers[1].noiseSettings;
 
@@ -95,47 +91,36 @@ public class RandomGeneration : MonoBehaviour
         rigidNoiseSettings.rigidNoiseSettings.weightMultiplier = Random.Range(r_WeightMultiplier.x, r_WeightMultiplier.y);
         rigidNoiseSettings.rigidNoiseSettings.minValue = Random.Range(r_MinimalValue.x, r_MinimalValue.y);
 
-        
+
 
         planet.resolution = 256;
         RandomiseColors();
-        planet.colorSettings.planetMaterial = currentMaterial;
         planet.StartCoroutine("MeshCoper");
-       // planet.MeshCoper();
+        // planet.MeshCoper();
         //planet.GeneratePlanet();
 
         checkIfPlanetsAreDone = true;
 
     }
 
-    [SerializeField]
-    Preset[] colorPresets;
-
     public void RandomiseColors()
     {
-        currentPreset = colorPresets[Random.Range(0,colorPresets.Length)];
 
-        currentPreset.ApplyTo(colorSettings);
+        currentTerrain = terrain.list[Random.Range(0,terrain.list.Length)];
+        currentOcean = ocean.list[Random.Range(0,ocean.list.Length)];
+        colorSettings.colorOfOcean = currentOcean;
+        colorSettings.biomeColorSettings.biomes[0].gradient = currentTerrain;
 
-
-        // if (currentPreset!=colorSettings)
-        // {
-        //    currentPreset.ApplyTo(colorSettings);
-        // }
-        // else
-        // {
-        //     RandomiseColors();
-        // }
     }
 
     public IEnumerator RandomiseInBackground()
     {
         RandomisePlanet();
- 
+
         yield return new WaitForSeconds(5f);
 
-        
-        
+
+
     }
 
     // Update is called once per frame
