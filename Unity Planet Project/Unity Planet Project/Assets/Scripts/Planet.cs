@@ -135,8 +135,9 @@ public class Planet : MonoBehaviour
 
     public IEnumerator MeshCoper()
     {
+        yield return new WaitForSeconds(3f);
         GeneratePlanet();
-        yield return null;
+        
     }
 
 }

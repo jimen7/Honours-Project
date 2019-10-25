@@ -88,7 +88,10 @@ public class RandomGeneration : MonoBehaviour
 
     public void RandomisePlanet()
     {
-        planet.resolution = 10; //Set planet resolution really low so that app doesn;'t lag when making changes, will be set back to max at the end of the method
+
+        if (Camera.main.GetComponent<FlyingCam>().GetHyperdriveStatus()==true)
+        {
+            planet.resolution = 10; //Set planet resolution really low so that app doesn;'t lag when making changes, will be set back to max at the end of the method
 
         shapeSettings.planetRadius = Random.Range(planetRadius.x, planetRadius.y);
 
@@ -174,6 +177,7 @@ public class RandomGeneration : MonoBehaviour
         //planet.GeneratePlanet();
 
         checkIfPlanetsAreDone = true;
+        }
 
     }
 

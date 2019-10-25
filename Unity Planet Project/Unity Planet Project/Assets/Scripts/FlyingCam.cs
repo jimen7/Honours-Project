@@ -25,6 +25,10 @@ public class FlyingCam : MonoBehaviour
     float speedFactor = 0.03f;   //linear speed of camera
     float angleFactor = 0.03f;    //Spherical interpolation of the camera compared to obkect it faces 
 
+    bool hyperdriveStatus = false;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +97,16 @@ public class FlyingCam : MonoBehaviour
         planetName.text = "";
     }
 
+    public bool GetHyperdriveStatus()
+    {
+        return hyperdriveStatus;
+    }
+
+    public void ChangeHyperdriveStatus()
+    {
+        hyperdriveStatus = !hyperdriveStatus;
+    }
+
     public void SetRandomPlanetView()
     {
         Transform temp = null;
@@ -148,12 +162,12 @@ public class FlyingCam : MonoBehaviour
            foreach (ParticleSystem p in particles)
            {
                p.Play();
-               p.playbackSpeed = 1f;
            }
            ChangePartcileBolean();
           // yield return new WaitForSeconds(2);
            //Camera.main.clearFlags = CameraClearFlags.SolidColor;
            StartCoroutine(ChangeBackground(CameraClearFlags.SolidColor));
+           ChangeHyperdriveStatus();
        }
        else
        {
@@ -169,6 +183,7 @@ public class FlyingCam : MonoBehaviour
           // yield return new WaitForSeconds(2);
            Camera.main.clearFlags = CameraClearFlags.Skybox;
           // StartCoroutine(ChangeBackground(CameraClearFlags.Skybox));
+          ChangeHyperdriveStatus();
        }
     }
 
