@@ -15,6 +15,7 @@ public class ColorSettings : ScriptableObject
     [System.Serializable]
     public class BiomeColorSettings
     {
+        
         public Biome[] biomes;
         public NoiseSettings noise;
         public float noiseOffset;
