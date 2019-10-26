@@ -18,6 +18,8 @@ public class RandomGeneration : MonoBehaviour
     public GradientLibrary terrain;
     public GradientLibrary ocean;
 
+    
+
 
     Gradient currentTerrain;
     Gradient currentOcean;
@@ -59,11 +61,13 @@ public class RandomGeneration : MonoBehaviour
 
     [Header("Biome Noise Attributes")]
     public Vector2 b_BiomeNumber = new Vector2(1f, 4f);
-    public Vector2 b_BlendAmount = new Vector2(0.5f, 1.0f);
+    public Vector2 b_BlendAmount = new Vector2(0.7f, 1.0f);
     public Vector2 b_MinValue = new Vector2(0.7f,0.9f);
-    public Vector2 b_BiomeNoiseStrength = new Vector2(1.0f, 1.3f);
+    public Vector2 b_BiomeNoiseStrength = new Vector2(1.0f, 1.3f);   //MIMINIMU WAS 1 and i changed it
     public Vector2 b_NoiseOffset_2Biomes = new Vector2(0.8f, 1.09f);
     public Vector2 b_NoiseOffset_Biomes = new Vector2(.1f, .5f);
+
+     public Vector2 b_NoiseOffset_3Biomes = new Vector2(6.5f, 8.5f);
 
     ColorSettings.BiomeColorSettings.Biome[] newBiomeList;
 
@@ -123,10 +127,10 @@ public class RandomGeneration : MonoBehaviour
         else if (newBiomeList.Length > colorSettings.biomeColorSettings.biomes.Length)
         {
             previousArraySize = colorSettings.biomeColorSettings.biomes.Length;
-            System.Array.Resize(ref colorSettings.biomeColorSettings.biomes, newBiomeList.Length);
+            //System.Array.Resize(ref colorSettings.biomeColorSettings.biomes, newBiomeList.Length);
             
             int j = 0;
-            for (int i = 0; i < previousArraySize; i++,j++)
+            for (int i = 0; i < previousArraySize; i++)
             {
                 newBiomeList[i] = colorSettings.biomeColorSettings.biomes[i];
                 j++;
@@ -139,9 +143,7 @@ public class RandomGeneration : MonoBehaviour
                 newBiomeList[i].startHeight = 0.0f;
             }
 
-            newBiomeList = colorSettings.biomeColorSettings.biomes;
-           // colorSettings.biomeColorSettings.biomes  = newBiomeList;
-           //colorSettings.biomeColorSettings.biomes.CopyTo(newBiomeList ,0);
+            colorSettings.biomeColorSettings.biomes = newBiomeList;
         }
         else
         {
@@ -149,8 +151,7 @@ public class RandomGeneration : MonoBehaviour
             {
                 newBiomeList[i] = colorSettings.biomeColorSettings.biomes[i];
             }
-            //colorSettings.biomeColorSettings.biomes  = newBiomeList;
-            newBiomeList.CopyTo(colorSettings.biomeColorSettings.biomes,0);
+            colorSettings.biomeColorSettings.biomes  = newBiomeList;
         }
 
         colorSettings.biomeColorSettings.noise.simpleNoiseSettings.minValue = Random.Range(b_MinValue.x, b_MinValue.y);
@@ -163,9 +164,15 @@ public class RandomGeneration : MonoBehaviour
         {
             colorSettings.biomeColorSettings.noiseOffset = Random.Range(b_NoiseOffset_2Biomes.x, b_NoiseOffset_2Biomes.y);
         }
-        else if (colorSettings.biomeColorSettings.biomes.Length != 1) //If it's 1 noise is not applied in the texture/Colors so we won't do any unessesary calculations
+        else if (colorSettings.biomeColorSettings.biomes.Length == 1) //If it's 1 noise is not applied in the texture/Colors so we won't do any unessesary calculations
         {
             colorSettings.biomeColorSettings.noiseOffset = Random.Range(b_NoiseOffset_Biomes.x, b_NoiseOffset_Biomes.y);
+        }
+        else if (colorSettings.biomeColorSettings.biomes.Length == 3)
+        {
+            colorSettings.biomeColorSettings.noiseOffset = Random.Range(b_NoiseOffset_3Biomes.x, b_NoiseOffset_3Biomes.y);
+            colorSettings.biomeColorSettings.noise.simpleNoiseSettings.minValue = 0f;
+            colorSettings.biomeColorSettings.noise.simpleNoiseSettings.strength = Random.Range(0.1f,0.2f);
         }
 
 
@@ -199,7 +206,7 @@ public class RandomGeneration : MonoBehaviour
 
     public IEnumerator RandomiseInBackground()
     {
-        RandomisePlanet();
+        RandomisePlanet();  
 
         yield return new WaitForSeconds(5f);
 
