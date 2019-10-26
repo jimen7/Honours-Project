@@ -28,20 +28,13 @@ public class Planet : MonoBehaviour
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
 
-    // private void OnValidate()    //On Validate method was replaced and it is nowe all being doen through the PLanet editor script
-    // {
-    //     // Initialize();
-    //     // GenerateMesh();
-    //     GeneratePlanet();
-    // }
-
     // Start is called before the first frame update, added to fix black planet issue, because the texture that we created while in edit mode is lost
     void Start()
     {
         GeneratePlanet();
     }
 
-    void Initialize()       ///NNEED TO CHNAGE IT ON MAKING
+    void Initialize()    
     {
         shapeGenerator.UpdateSettings(shapeSettings);
         colorGenerator.UpdateSettings(colorSettings);
@@ -64,13 +57,12 @@ public class Planet : MonoBehaviour
                 meshObj.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
                 //meshFilters[i].sharedMesh = new Mesh();
-                meshFilters[i].mesh = new Mesh();
+                meshFilters[i].mesh = new Mesh();   
             }
-            // ORIGINAL meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial; //Making sure planet material gets assigned to then planet mesh
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial; //Making sure planet material gets assigned to then planet mesh  
 
             // ORIGINAL terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
-            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].mesh, resolution, directions[i]);  //ERROR LINE,LEAKINMG MESH
+            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].mesh, resolution, directions[i]);  //Editor throws a suggestion fix because we are instantiating the mesh but we want to instantiate it
             bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i; //So we can render one face at a time
             meshFilters[i].gameObject.SetActive(renderFace);
         }
@@ -126,7 +118,7 @@ public class Planet : MonoBehaviour
             }
         }
 
-        //Before altering the method to be a void for the sake of not creating a new texture everry time
+        //Before altering the method to be a void for the sake of not creating a new texture every time IMPROVEMENT
         // foreach (MeshFilter m in meshFilters)
         // {
         //     m.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColour;

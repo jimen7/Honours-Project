@@ -15,11 +15,7 @@ public class ColorGenerator
         if (texture == null || texture.height != settings.biomeColorSettings.biomes.Length)
         {
             //Uing first half of texture for ocean and second half for solid ground
-            texture = new Texture2D(textureResolution*2, settings.biomeColorSettings.biomes.Length, TextureFormat.RGBA32, false);
-
-           // texture = new Texture2D(textureResolution, settings.biomeColorSettings.biomes.Length, TextureFormat.RGBA32, false); //To fox coloring issue on this unity version
-            //texture = new Texture2D(textureResolution, settings.biomeColorSettings.biomes.Length);    //Before adding biomes we only needed one texture
-            // texture = new Texture2D(textureResolution, 1);    //Before adding biomes we only needed one texture
+            texture = new Texture2D(textureResolution * 2, settings.biomeColorSettings.biomes.Length, TextureFormat.RGBA32, false);
         }
         biomeNoiseFilter = NoiseFilterFactory.CreateNoiseFilter(settings.biomeColorSettings.noise);
 
@@ -43,19 +39,9 @@ public class ColorGenerator
         {
 
             float distance = heightPercent - settings.biomeColorSettings.biomes[i].startHeight;
-            float weight = Mathf.InverseLerp(-blendRange,blendRange, distance);
-            biomeIndex *= (1-weight);
+            float weight = Mathf.InverseLerp(-blendRange, blendRange, distance);
+            biomeIndex *= (1 - weight);
             biomeIndex += i * weight;
-
-            //Before mixing colors together
-            // if (settings.biomeColorSettings.biomes[i].startHeight < heightPercent)
-            // {
-            //     biomeIndex = i;
-            // }
-            // else
-            // {
-            //     break;
-            // }
         }
         return biomeIndex / Mathf.Max(1, numBiomes - 1);    //Return biome index but squeeze it from 0 to 1
     }
@@ -68,7 +54,7 @@ public class ColorGenerator
         int colorIndex = 0;
         foreach (var biome in settings.biomeColorSettings.biomes)       //loop througgh all the biomes
         {
-            for (int i = 0; i < textureResolution*2; i++)   //*2 because we added the ocxean texture in the first half */
+            for (int i = 0; i < textureResolution * 2; i++)   //*2 because we added the ocxean texture in the first half */
             {
                 Color gradientCol;
                 if (i < textureResolution)  //Then sample from the ocean gradient
@@ -78,8 +64,7 @@ public class ColorGenerator
                 else    //Evaluate from biome Gradient
                 {
                     gradientCol = biome.gradient.Evaluate((i - textureResolution) / (textureResolution - 1f));    //Evaluate same way as single gradient, evaluate from biome. this should be between 0 and 1 which is whjy nwe are substarcting texture resolution from i
-                }
-               // Color gradientCol = biome.gradient.Evaluate(i / (textureResolution - 1f));  
+                } 
                 Color tintCol = biome.tint;
                 colors[colorIndex] = gradientCol * (1 - biome.tintPercent) + tintCol * biome.tintPercent;
                 colorIndex++;

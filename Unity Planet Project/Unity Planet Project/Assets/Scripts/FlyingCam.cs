@@ -8,7 +8,7 @@ public class FlyingCam : MonoBehaviour
 
 
     float ScrollWheelChange;
-    Vector3 zoomBy = new Vector3(0f,0f,0f);
+    Vector3 zoomBy = new Vector3(0f, 0f, 0f);
 
     public ParticleSystem[] particles;
 
@@ -26,7 +26,6 @@ public class FlyingCam : MonoBehaviour
     float angleFactor = 0.03f;    //Spherical interpolation of the camera compared to obkect it faces 
 
     bool hyperdriveStatus = false;
-
 
 
     // Start is called before the first frame update
@@ -47,52 +46,45 @@ public class FlyingCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
-        //planetName.rectTransform.anchoredPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, currView.parent.GetChild(0).position);
-
-         ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");
+        ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");
 
         //zoom in and out
-        if (ScrollWheelChange != 0){                                            //If the scrollwheel has changed
-             float R = ScrollWheelChange * 15;                                   //The radius from current camera
-             float PosX = Camera.main.transform.eulerAngles.x + 90;              //Get up and down
-             float PosY = -1 * (Camera.main.transform.eulerAngles.y - 90);       //Get left to right
-             PosX = PosX / 180 * Mathf.PI;                                       //Convert from degrees to radians
-             PosY = PosY / 180 * Mathf.PI;                                       //^
-             float X = R * Mathf.Sin(PosX) * Mathf.Cos(PosY);                    //Calculate new coords
-             float Z = R * Mathf.Sin(PosX) * Mathf.Sin(PosY);                    //^
-             float Y = R * Mathf.Cos(PosX);                                      //^
-             zoomBy = zoomBy + new Vector3(X,Y,Z);
-            //  float CamX = Camera.main.transform.position.x;                      //Get current camera postition for the offset
-            //  float CamY = Camera.main.transform.position.y;                      //^
-            //  float CamZ = Camera.main.transform.position.z;                      //^
-            //  Camera.main.transform.position = new Vector3(CamX + X, CamY + Y, CamZ + Z);//Move the main camera
-         }
+        if (ScrollWheelChange != 0)
+        {                                            //If the scrollwheel has changed
+            float R = ScrollWheelChange * 15;                                   //The radius from current camera
+            float PosX = Camera.main.transform.eulerAngles.x + 90;              //Get up and down
+            float PosY = -1 * (Camera.main.transform.eulerAngles.y - 90);       //Get left to right
+            PosX = PosX / 180 * Mathf.PI;                                       //Convert from degrees to radians
+            PosY = PosY / 180 * Mathf.PI;                                       //^
+            float X = R * Mathf.Sin(PosX) * Mathf.Cos(PosY);                    //Calculate new coords
+            float Z = R * Mathf.Sin(PosX) * Mathf.Sin(PosY);                    //^
+            float Y = R * Mathf.Cos(PosX);                                      //^
+            zoomBy = zoomBy + new Vector3(X, Y, Z);
+        }
 
-         transform.position = Vector3.Lerp(transform.position, currView.position + zoomBy, speedFactor); //starting point, end point, and how fast it will move in  etween them, Lerp = linear interpolation
-         transform.rotation = Quaternion.Slerp(transform.rotation, currView.rotation, angleFactor);
+        transform.position = Vector3.Lerp(transform.position, currView.position + zoomBy, speedFactor); //starting point, end point, and how fast it will move in  etween them, Lerp = linear interpolation
+        transform.rotation = Quaternion.Slerp(transform.rotation, currView.rotation, angleFactor);
     }
 
 
     public void SetNewPlanet(Transform p)
     {
-        zoomBy = new Vector3(0,0,0);    //Reset zoom values
+        zoomBy = new Vector3(0, 0, 0);    //Reset zoom values
         currView = p;
 
-        for (int i = 0; i < currView.parent.childCount;i++)
+        for (int i = 0; i < currView.parent.childCount; i++)
+        {
+            if (currView.parent.GetChild(i).GetComponent<Planet>() != null)
             {
-                if (currView.parent.GetChild(i).GetComponent<Planet>()!=null)
-                {
-                    planetName.text = currView.parent.GetChild(i).name;
-                    break;
-                }
+                planetName.text = currView.parent.GetChild(i).name;
+                break;
             }
+        }
     }
 
     public void SetSysOverview(Transform p)
     {
-        zoomBy = new Vector3(0,0,0);    //Reset zoom values
+        zoomBy = new Vector3(0, 0, 0);    //Reset zoom values
         currView = p;
         planetName.text = "";
     }
@@ -110,42 +102,28 @@ public class FlyingCam : MonoBehaviour
     public void SetRandomPlanetView()
     {
         Transform temp = null;
-        zoomBy = new Vector3(0,0,0);    //Reset zoom values
+        zoomBy = new Vector3(0, 0, 0);    //Reset zoom values
 
-        // Check if any planets can be highlighted
-        if (cameraPoint.Length > 0)
+        if (cameraPoint.Length > 0) //Set rabdom point near a planet from the predifined points
         {
             temp = cameraPoint[Random.Range(0, cameraPoint.Length)];
         }
 
-        //check that the current one has not been used again
-
-        if (currView.gameObject.Equals(temp.gameObject))
+        if (currView.gameObject.Equals(temp.gameObject))    //check that the current one has not been used again
         {
-            SetRandomPlanetView(); 
+            SetRandomPlanetView();
         }
         else
         {
-
             currView = temp;
-            // Planet planet = currView.gameObject.GetComponent<Planet>();
-
-            // foreach (GameObject g in currView.parent)
-            // {
-            //     if ()
-            // }
-
-            for (int i = 0; i < currView.parent.childCount;i++)
+            for (int i = 0; i < currView.parent.childCount; i++)
             {
-                if (currView.parent.GetChild(i).GetComponent<Planet>()!=null)
+                if (currView.parent.GetChild(i).GetComponent<Planet>() != null)
                 {
                     planetName.text = currView.parent.GetChild(i).name;
                     break;
                 }
             }
-
-           // planetName.text = currView.parent.GetChild(0).name; //camera is 2nd child of planet container, so we want the first child which is the planet
-
         }
     }
 
@@ -156,35 +134,27 @@ public class FlyingCam : MonoBehaviour
 
     public void Hyperdrive()
     {
-       if (!particlesEnabled)
-       {
-           //Camera.main.GetComponent<Skybox>().enabled = false;
-           foreach (ParticleSystem p in particles)
-           {
-               p.Play();
-           }
-           ChangePartcileBolean();
-          // yield return new WaitForSeconds(2);
-           //Camera.main.clearFlags = CameraClearFlags.SolidColor;
-           StartCoroutine(ChangeBackground(CameraClearFlags.SolidColor));
-           ChangeHyperdriveStatus();
-       }
-       else
-       {
-           //Camera.main.GetComponent<Skybox>().enabled = true;
-           foreach (ParticleSystem p in particles)
-           {
-               p.Stop();
-//               Camera.main.GetComponent<Skybox>().enabled = true;
-           }
-           currView = systemOverviewLocation;
-          // currView.position = Vector3.Lerp(transform.position, systemOverviewLocation.position, speedFactor);
-           ChangePartcileBolean();
-          // yield return new WaitForSeconds(2);
-           Camera.main.clearFlags = CameraClearFlags.Skybox;
-          // StartCoroutine(ChangeBackground(CameraClearFlags.Skybox));
-          ChangeHyperdriveStatus();
-       }
+        if (!particlesEnabled)
+        {
+            foreach (ParticleSystem p in particles)
+            {
+                p.Play();
+            }
+            ChangePartcileBolean();
+            StartCoroutine(ChangeBackground(CameraClearFlags.SolidColor));
+            ChangeHyperdriveStatus();
+        }
+        else
+        {
+            foreach (ParticleSystem p in particles)
+            {
+                p.Stop();
+            }
+            currView = systemOverviewLocation;
+            ChangePartcileBolean();
+            Camera.main.clearFlags = CameraClearFlags.Skybox;
+            ChangeHyperdriveStatus();
+        }
     }
 
     IEnumerator ChangeBackground(CameraClearFlags v)

@@ -17,51 +17,19 @@ MonoBehaviour:
     biomes:
     - gradient:
         serializedVersion: 2
-        key0: {r: 0.16487184, g: 0.42242643, b: 0.6132076, a: 1}
-        key1: {r: 0.7075472, g: 0.6930369, b: 0.39716092, a: 1}
-        key2: {r: 0.3637593, g: 0.6509434, b: 0.26099145, a: 0}
-        key3: {r: 0.08254716, g: 0.5, b: 0.09865097, a: 0}
-        key4: {r: 0.22312121, g: 0.5377358, b: 0.109069064, a: 0}
-        key5: {r: 0.6698113, g: 0.4447145, b: 0.23696156, a: 0}
-        key6: {r: 0.5377358, g: 0.4356421, b: 0, a: 0}
-        key7: {r: 0.3207547, g: 0.1701421, b: 0.04690281, a: 0}
+        key0: {r: 0.254717, g: 0.025359523, b: 0.022828404, a: 1}
+        key1: {r: 0.4433962, g: 0.12758097, b: 0.12758097, a: 1}
+        key2: {r: 0.9056604, g: 0, b: 0.017036151, a: 0}
+        key3: {r: 0.26415092, g: 0.13938126, b: 0.11587752, a: 0}
+        key4: {r: 0.9647059, g: 0.5180841, b: 0.22352937, a: 0}
+        key5: {r: 0.754717, g: 0.22768657, b: 0.2171591, a: 0}
+        key6: {r: 1, g: 0.14010851, b: 0, a: 0}
+        key7: {r: 0.36078432, g: 0.003921569, b: 0, a: 0}
         ctime0: 0
         ctime1: 5337
         ctime2: 11047
         ctime3: 26189
         ctime4: 35870
-        ctime5: 38973
-        ctime6: 47031
-        ctime7: 65535
-        atime0: 0
-        atime1: 65535
-        atime2: 0
-        atime3: 0
-        atime4: 0
-        atime5: 0
-        atime6: 0
-        atime7: 0
-        m_Mode: 0
-        m_NumColorKeys: 8
-        m_NumAlphaKeys: 2
-      tint: {r: 0.6037736, g: 0.11107157, b: 0.11107157, a: 0}
-      startHeight: 0
-      tintPercent: 0
-    - gradient:
-        serializedVersion: 2
-        key0: {r: 0.7075472, g: 0.6930369, b: 0.39716092, a: 1}
-        key1: {r: 0.6509804, g: 0.53628075, b: 0.2627451, a: 1}
-        key2: {r: 0.5019608, g: 0.31686708, b: 0.08235294, a: 0}
-        key3: {r: 0.5372549, g: 0.49902114, b: 0.10980392, a: 0}
-        key4: {r: 0.8152303, g: 0.8301887, b: 0.6226415, a: 0}
-        key5: {r: 0.8679245, g: 0.58471715, b: 0.26610893, a: 0}
-        key6: {r: 1, g: 1, b: 1, a: 0}
-        key7: {r: 0.03137255, g: 0.007843138, b: 0, a: 0}
-        ctime0: 5337
-        ctime1: 11047
-        ctime2: 26189
-        ctime3: 35870
-        ctime4: 38973
         ctime5: 47031
         ctime6: 65535
         ctime7: 0
@@ -76,19 +44,19 @@ MonoBehaviour:
         m_Mode: 0
         m_NumColorKeys: 7
         m_NumAlphaKeys: 2
-      tint: {r: 1, g: 0, b: 0, a: 1}
+      tint: {r: 0.6037736, g: 0.11107157, b: 0.11107157, a: 0}
       startHeight: 0
       tintPercent: 0
     noise:
-      filterType: 0
+      filterType: 1
       simpleNoiseSettings:
-        strength: 0.15976098
+        strength: 0.13592863
         numLayers: 3
         baseRoughness: 1
         roughness: 2
         persistence: 0.5
         centre: {x: 0, y: 0, z: 0}
-        minValue: 0.80255365
+        minValue: 0.77059007
       rigidNoiseSettings:
         strength: 1
         numLayers: 1
@@ -96,21 +64,21 @@ MonoBehaviour:
         roughness: 2
         persistence: 0.5
         centre: {x: 0, y: 0, z: 0}
-        minValue: 0.80427784
+        minValue: 0.72025526
         weightMultiplier: 0.8
-    noiseOffset: 0.10709902
-    noiseStrength: 1.1966982
-    blendAmount: 0.61628574
+    noiseOffset: 0.11047066
+    noiseStrength: 1.2307377
+    blendAmount: 0.5211724
   colorOfOcean:
     serializedVersion: 2
-    key0: {r: 0.09024564, g: 0.19703162, b: 0.49056602, a: 1}
-    key1: {r: 0.15969352, g: 0.13456745, b: 0.4528302, a: 1}
-    key2: {r: 0.14504364, g: 0.2928115, b: 0.5593507, a: 0}
-    key3: {r: 0.368325, g: 0.6830789, b: 0.8396226, a: 0}
-    key4: {r: 0.6901961, g: 0, b: 0, a: 0}
-    key5: {r: 0.6901961, g: 0, b: 0, a: 0}
-    key6: {r: 0.6901961, g: 0, b: 0, a: 0}
-    key7: {r: 0.6901961, g: 0, b: 0, a: 0}
+    key0: {r: 0.49019608, g: 0.102191344, b: 0.09019609, a: 1}
+    key1: {r: 0.59607846, g: 0.20723692, b: 0.19999999, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0.8509804, g: 0.16680217, b: 0.12549017, a: 0}
+    key4: {r: 0.03137255, g: 0.007843138, b: 0, a: 0}
+    key5: {r: 0.03137255, g: 0.007843138, b: 0, a: 0}
+    key6: {r: 0.03137255, g: 0.007843138, b: 0, a: 0}
+    key7: {r: 0.03137255, g: 0.007843138, b: 0, a: 0}
     ctime0: 0
     ctime1: 23130
     ctime2: 47802
