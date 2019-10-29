@@ -28,6 +28,7 @@ public class FlyingCam : MonoBehaviour
     bool hyperdriveStatus = false;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +100,26 @@ public class FlyingCam : MonoBehaviour
         hyperdriveStatus = !hyperdriveStatus;
     }
 
+    public void ChangeOtherButtonsStatus()
+    {
+        GameObject[] buttons = GameObject.FindGameObjectsWithTag("UIButtons");
+        foreach (GameObject b in buttons)
+        {
+            b.GetComponent<Button>().interactable = !b.GetComponent<Button>().interactable;
+
+            /*
+             if (b.GetComponent<Button>().interactable == true)
+            {
+                b.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                b.GetComponent<Button>().interactable = true;
+            }
+             */
+        }
+    }
+
     public void SetRandomPlanetView()
     {
         Transform temp = null;
@@ -141,6 +162,7 @@ public class FlyingCam : MonoBehaviour
                 p.Play();
             }
             ChangePartcileBolean();
+            ChangeOtherButtonsStatus();
             StartCoroutine(ChangeBackground(CameraClearFlags.SolidColor));
             ChangeHyperdriveStatus();
         }
@@ -152,7 +174,8 @@ public class FlyingCam : MonoBehaviour
             }
             currView = systemOverviewLocation;
             ChangePartcileBolean();
-            Camera.main.clearFlags = CameraClearFlags.Skybox;
+            ChangeOtherButtonsStatus();
+            Camera.main.clearFlags = CameraClearFlags.Skybox;  
             ChangeHyperdriveStatus();
         }
     }
