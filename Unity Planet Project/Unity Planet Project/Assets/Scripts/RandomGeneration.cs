@@ -43,31 +43,31 @@ public class RandomGeneration : MonoBehaviour
     Vector2 planetRadius = new Vector2(1.0f, 4.0f);
 
     [Header("Simple Noise Attributes")]
-    public Vector2 s_Strength = new Vector2(0.01f, 0.1f);
-    public Vector2 s_BaseRoughness = new Vector2(1f, 2f);
-    public Vector2 s_Roughness = new Vector2(2.2f, 3.2f);
-    public Vector2 s_Centre = new Vector2(0f, 20f);
-    public Vector2 s_MinimalValue = new Vector2(0.2f, 1f);
+    public Vector2 simple_Strength = new Vector2(0.01f, 0.1f);
+    public Vector2 simple_BaseRoughness = new Vector2(1f, 2f);
+    public Vector2 simple_Roughness = new Vector2(2.2f, 3.2f);
+    public Vector2 simple_Centre = new Vector2(0f, 20f);
+    public Vector2 simple_MinimalValue = new Vector2(0.2f, 1f);
 
 
-    [Header("Ridgid Noise Attributes")]
-    public Vector2 r_Strength = new Vector2(0.6f, 1f);
-    public Vector2 r_BaseRoughness = new Vector2(1f, 4.5f);
-    public Vector2 r_Roughness = new Vector2(1f, 2f);
-    public Vector2 r_Persistence = new Vector2(.3f, .8f);
-    public Vector2 r_Centre = new Vector2(0f, 20f);
-    public Vector2 r_MinimalValue = new Vector2(0f, 1f);
-    public Vector2 r_WeightMultiplier = new Vector2(0.3f, 2.5f);
+    [Header("Rigid Noise Attributes")]
+    public Vector2 rigid_Strength = new Vector2(0.6f, 1f);
+    public Vector2 rigid_BaseRoughness = new Vector2(1f, 4.5f);
+    public Vector2 rigid_Roughness = new Vector2(1f, 2f);
+    public Vector2 rigid_Persistence = new Vector2(.3f, .8f);
+    public Vector2 rigid_Centre = new Vector2(0f, 20f);
+    public Vector2 rigid_MinimalValue = new Vector2(0f, 1f);
+    public Vector2 rigid_WeightMultiplier = new Vector2(0.3f, 2.5f);
 
     [Header("Biome Noise Attributes")]
-    public Vector2 b_BiomeNumber = new Vector2(1f, 4f);
-    public Vector2 b_BlendAmount = new Vector2(0.7f, 1.0f);
-    public Vector2 b_MinValue = new Vector2(0.7f,0.9f);
-    public Vector2 b_BiomeNoiseStrength = new Vector2(1.0f, 1.3f);   //MIMINIMU WAS 1 and i changed it
-    public Vector2 b_NoiseOffset_2Biomes = new Vector2(0.8f, 1.09f);
-    public Vector2 b_NoiseOffset_Biomes = new Vector2(.1f, .5f);
+    public Vector2 biome_BiomeNumber = new Vector2(1f, 4f);
+    public Vector2 biome_BlendAmount = new Vector2(0.7f, 1.0f);
+    public Vector2 biome_MinValue = new Vector2(0.7f,0.9f);
+    public Vector2 biome_BiomeNoiseStrength = new Vector2(1.0f, 1.3f);   //MIMINIMU WAS 1 and i changed it
+    public Vector2 biome_NoiseOffset_2Biomes = new Vector2(0.8f, 1.09f);
+    public Vector2 biome_NoiseOffset_Biomes = new Vector2(.1f, .5f);
 
-     public Vector2 b_NoiseOffset_3Biomes = new Vector2(6.5f, 8.5f);
+     public Vector2 biome_NoiseOffset_3Biomes = new Vector2(6.5f, 8.5f);
 
     ColorSettings.BiomeColorSettings.Biome[] newBiomeList;
 
@@ -99,30 +99,28 @@ public class RandomGeneration : MonoBehaviour
 
         shapeSettings.planetRadius = Random.Range(planetRadius.x, planetRadius.y);
 
-        //Simple noise RNG (highly unoptimised)
-        simpleNoiseSettings.simpleNoiseSettings.strength = Random.Range(s_Strength.x, s_Strength.y);
-        simpleNoiseSettings.simpleNoiseSettings.baseRoughness = Random.Range(s_BaseRoughness.x, s_BaseRoughness.y);
-        simpleNoiseSettings.simpleNoiseSettings.roughness = Random.Range(s_Roughness.x, s_Roughness.y);
-        simpleNoiseSettings.simpleNoiseSettings.centre = new Vector3(Random.Range(s_Centre.x, s_Centre.y), Random.Range(s_Centre.x, s_Centre.y), Random.Range(s_Centre.x, s_Centre.y));
+        //Simple noise randomised settings
+        simpleNoiseSettings.simpleNoiseSettings.strength = Random.Range(simple_Strength.x, simple_Strength.y);
+        simpleNoiseSettings.simpleNoiseSettings.baseRoughness = Random.Range(simple_BaseRoughness.x, simple_BaseRoughness.y);
+        simpleNoiseSettings.simpleNoiseSettings.roughness = Random.Range(simple_Roughness.x, simple_Roughness.y);
+        simpleNoiseSettings.simpleNoiseSettings.centre = new Vector3(Random.Range(simple_Centre.x, simple_Centre.y), Random.Range(simple_Centre.x, simple_Centre.y), Random.Range(simple_Centre.x, simple_Centre.y));
 
 
-        //Ridgid noise RNG (highly unoptimised)
-        rigidNoiseSettings.rigidNoiseSettings.strength = Random.Range(r_Strength.x, r_Strength.y);
-        rigidNoiseSettings.rigidNoiseSettings.baseRoughness = Random.Range(r_BaseRoughness.x, r_BaseRoughness.y);
-        rigidNoiseSettings.rigidNoiseSettings.roughness = Random.Range(r_Roughness.x, r_Roughness.y);
-        rigidNoiseSettings.rigidNoiseSettings.persistence = Random.Range(r_Persistence.x, r_Persistence.y);
-        rigidNoiseSettings.rigidNoiseSettings.centre = new Vector3(Random.Range(r_Centre.x, r_Centre.y), Random.Range(r_Centre.x, r_Centre.y), Random.Range(r_Centre.x, r_Centre.y));
-        rigidNoiseSettings.rigidNoiseSettings.weightMultiplier = Random.Range(r_WeightMultiplier.x, r_WeightMultiplier.y);
-        rigidNoiseSettings.rigidNoiseSettings.minValue = Random.Range(r_MinimalValue.x, r_MinimalValue.y);
+        //Ridgid noise randomised settings
+        rigidNoiseSettings.rigidNoiseSettings.strength = Random.Range(rigid_Strength.x, rigid_Strength.y);
+        rigidNoiseSettings.rigidNoiseSettings.baseRoughness = Random.Range(rigid_BaseRoughness.x, rigid_BaseRoughness.y);
+        rigidNoiseSettings.rigidNoiseSettings.roughness = Random.Range(rigid_Roughness.x, rigid_Roughness.y);
+        rigidNoiseSettings.rigidNoiseSettings.persistence = Random.Range(rigid_Persistence.x, rigid_Persistence.y);
+        rigidNoiseSettings.rigidNoiseSettings.centre = new Vector3(Random.Range(rigid_Centre.x, rigid_Centre.y), Random.Range(rigid_Centre.x, rigid_Centre.y), Random.Range(rigid_Centre.x, rigid_Centre.y));
+        rigidNoiseSettings.rigidNoiseSettings.weightMultiplier = Random.Range(rigid_WeightMultiplier.x, rigid_WeightMultiplier.y);
+        rigidNoiseSettings.rigidNoiseSettings.minValue = Random.Range(rigid_MinimalValue.x, rigid_MinimalValue.y);
 
         //Biome Settings(Noise and Biome Numbers)
-        newBiomeList = new ColorSettings.BiomeColorSettings.Biome[Mathf.FloorToInt(Random.Range(b_BiomeNumber.x, b_BiomeNumber.y))];
+        newBiomeList = new ColorSettings.BiomeColorSettings.Biome[Mathf.FloorToInt(Random.Range(biome_BiomeNumber.x, biome_BiomeNumber.y))];
 
         if (newBiomeList.Length == colorSettings.biomeColorSettings.biomes.Length)
         {
-           // newBiomeList.CopyTo(colorSettings.biomeColorSettings.biomes,0);
-
-            //colorSettings.biomeColorSettings.biomes = newBiomeList;
+           //DO nothing as the biomes will be the dame length and randomized later on
         }
         else if (newBiomeList.Length > colorSettings.biomeColorSettings.biomes.Length)
         {
@@ -154,35 +152,30 @@ public class RandomGeneration : MonoBehaviour
             colorSettings.biomeColorSettings.biomes  = newBiomeList;
         }
 
-        colorSettings.biomeColorSettings.noise.simpleNoiseSettings.minValue = Random.Range(b_MinValue.x, b_MinValue.y);
-        colorSettings.biomeColorSettings.noise.rigidNoiseSettings.minValue = Random.Range(b_MinValue.x, b_MinValue.y);
-        colorSettings.biomeColorSettings.blendAmount = Random.Range(b_BlendAmount.x, b_BlendAmount.y);
-        colorSettings.biomeColorSettings.noiseStrength = Random.Range(b_BiomeNoiseStrength.x, b_BiomeNoiseStrength.y);
+        colorSettings.biomeColorSettings.noise.simpleNoiseSettings.minValue = Random.Range(biome_MinValue.x, biome_MinValue.y);
+        colorSettings.biomeColorSettings.noise.rigidNoiseSettings.minValue = Random.Range(biome_MinValue.x, biome_MinValue.y);
+        colorSettings.biomeColorSettings.blendAmount = Random.Range(biome_BlendAmount.x, biome_BlendAmount.y);
+        colorSettings.biomeColorSettings.noiseStrength = Random.Range(biome_BiomeNoiseStrength.x, biome_BiomeNoiseStrength.y);
 
 
         if (colorSettings.biomeColorSettings.biomes.Length == 2)
         {
-            colorSettings.biomeColorSettings.noiseOffset = Random.Range(b_NoiseOffset_2Biomes.x, b_NoiseOffset_2Biomes.y);
+            colorSettings.biomeColorSettings.noiseOffset = Random.Range(biome_NoiseOffset_2Biomes.x, biome_NoiseOffset_2Biomes.y);
         }
         else if (colorSettings.biomeColorSettings.biomes.Length == 1) //If it's 1 noise is not applied in the texture/Colors so we won't do any unessesary calculations
         {
-            colorSettings.biomeColorSettings.noiseOffset = Random.Range(b_NoiseOffset_Biomes.x, b_NoiseOffset_Biomes.y);
+            colorSettings.biomeColorSettings.noiseOffset = Random.Range(biome_NoiseOffset_Biomes.x, biome_NoiseOffset_Biomes.y);
         }
         else if (colorSettings.biomeColorSettings.biomes.Length == 3)
         {
-            colorSettings.biomeColorSettings.noiseOffset = Random.Range(b_NoiseOffset_3Biomes.x, b_NoiseOffset_3Biomes.y);
+            colorSettings.biomeColorSettings.noiseOffset = Random.Range(biome_NoiseOffset_3Biomes.x, biome_NoiseOffset_3Biomes.y);
             colorSettings.biomeColorSettings.noise.simpleNoiseSettings.minValue = 0f;
             colorSettings.biomeColorSettings.noise.simpleNoiseSettings.strength = Random.Range(0.1f,0.2f);
         }
 
-
-
         planet.resolution = 256;
         RandomiseColors();
-        planet.StartCoroutine("MeshCoper");
-        // planet.MeshCoper();
-        //planet.GeneratePlanet();
-
+        planet.StartCoroutine("MeshCoper"); //Generates the planets after 2 seconds so that the camera is already in front of the hyperdrive and particles have been initiated
         checkIfPlanetsAreDone = true;
         }
 
@@ -192,16 +185,12 @@ public class RandomGeneration : MonoBehaviour
     {
         currentOcean = ocean.list[Random.Range(0, ocean.list.Length)];
         colorSettings.colorOfOcean = currentOcean;
-
-
-        for (int i = 0; i < colorSettings.biomeColorSettings.biomes.Length; i++)
+        for (int i = 0; i < colorSettings.biomeColorSettings.biomes.Length; i++)    //CHoose terrain colors for each biome of the planet randomly from the terrain pool
         {
             currentTerrain = terrain.list[Random.Range(0, terrain.list.Length)];
             colorSettings.biomeColorSettings.biomes[i].gradient = currentTerrain;
 
         }
-
-
     }
 
     public IEnumerator RandomiseInBackground()
@@ -209,15 +198,5 @@ public class RandomGeneration : MonoBehaviour
         RandomisePlanet();  
 
         yield return new WaitForSeconds(5f);
-
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
     }
 }
