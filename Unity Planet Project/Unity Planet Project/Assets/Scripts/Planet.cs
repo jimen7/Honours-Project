@@ -26,7 +26,7 @@ public class Planet : MonoBehaviour
 
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
-    TerrainFace[] terrainFaces;
+    SphereSide[] sphereSides;
 
     // Start is called before the first frame update, added to fix black planet issue, because the texture that we created while in edit mode is lost
     void Start()
@@ -42,7 +42,7 @@ public class Planet : MonoBehaviour
         {
             meshFilters = new MeshFilter[6];
         }
-        terrainFaces = new TerrainFace[6];
+        sphereSides = new SphereSide[6];
 
         Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
 
@@ -62,7 +62,7 @@ public class Planet : MonoBehaviour
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial; //Making sure planet material gets assigned to then planet mesh  
 
             // ORIGINAL terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
-            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].mesh, resolution, directions[i]);  //Editor throws a suggestion fix because we are instantiating the mesh but we want to instantiate it
+            sphereSides[i] = new SphereSide(shapeGenerator, meshFilters[i].mesh, resolution, directions[i]);  //Editor throws a suggestion fix because we are instantiating the mesh but we want to instantiate it
             bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i; //So we can render one face at a time
             meshFilters[i].gameObject.SetActive(renderFace);
         }
@@ -99,7 +99,7 @@ public class Planet : MonoBehaviour
         {
             if (meshFilters[i].gameObject.activeSelf)
             {
-                terrainFaces[i].ConstructMesh();
+                sphereSides[i].ConstructMesh();
             }
         }
 
@@ -114,15 +114,9 @@ public class Planet : MonoBehaviour
         {
             if (meshFilters[i].gameObject.activeSelf)
             {
-                terrainFaces[i].UpdateUVs(colorGenerator);
+                sphereSides[i].UpdateUVs(colorGenerator);
             }
         }
-
-        //Before altering the method to be a void for the sake of not creating a new texture every time IMPROVEMENT
-        // foreach (MeshFilter m in meshFilters)
-        // {
-        //     m.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColour;
-        // }
     }
 
     public IEnumerator MeshCoper()

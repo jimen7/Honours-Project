@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainFace
+public class SphereSide
 {
 
     ShapeGenerator shapeGenerator;
@@ -12,7 +12,7 @@ public class TerrainFace
     Vector3 axisA; //Axis between normal and ground axis
     Vector3 axisB; //Axis perpendicular to normal along the ground
 
-    public TerrainFace(ShapeGenerator shapeGenerator, Mesh mesh, int resolution, Vector3 localUp)
+    public SphereSide(ShapeGenerator shapeGenerator, Mesh mesh, int resolution, Vector3 localUp)
     {
         this.shapeGenerator = shapeGenerator;
         this.mesh = mesh;
