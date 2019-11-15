@@ -101,8 +101,11 @@ public class Noise
     public float Evaluate(UnityEngine.Vector3 point)
     {
         double x = point.x;
+
         double y = point.y;
+
         double z = point.z;
+
         double n0 = 0, n1 = 0, n2 = 0, n3 = 0;
 
         // Noise contributions from the four corners
@@ -111,15 +114,21 @@ public class Noise
 
         // for 3D
         int i = FastFloor(x + s);
+
         int j = FastFloor(y + s);
+
         int k = FastFloor(z + s);
 
         double t = (i + j + k)*G3;
 
         // The x,y,z distances from the cell origin
+        
         double x0 = x - (i - t);
+
         double y0 = y - (j - t);
+
         double z0 = z - (k - t);
+
 
         // For the 3D case, the simplex shape is a slightly irregular tetrahedron.
         // Determine which simplex we are in.

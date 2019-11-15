@@ -29,7 +29,7 @@ public class SphereSide
         int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
         int triIndex = 0; //Keeps a track of whicch point of the square is where
         //we want to make sure that uvs are thye right size in case resolution is changed, aso we add an ifd statement
-        Vector2[] uv = (mesh.uv.Length == vertices.Length)? mesh.uv : new Vector2[vertices.Length]; //This is added so when we rebuild the mesh we don't want to lose the uv data
+        Vector2[] uv = (mesh.uv.Length == vertices.Length)? mesh.uv : new Vector2[vertices.Length]; //This is added so when we rebuild the mesh we don't want to lose the uv data.
 
         //This method uses the same technique we used in Physics to crerate the Physics Flag
         for (int y = 0; y < resolution; y++)
@@ -64,8 +64,8 @@ public class SphereSide
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        //mesh.normals= vertices;     //Fixes the seams temporarily instead of recalculating the nmormals. also saves computiung power
-        mesh.RecalculateNormals();  //works but seams are visible
+        mesh.normals= vertices;     //Fixes the seams temporarily instead of recalculating the nmormals. also saves computiung power
+        //mesh.RecalculateNormals();  //works but seams are visible
         if (mesh.uv.Length == uv.Length )
         {
             mesh.uv = uv;
@@ -80,7 +80,7 @@ public class SphereSide
     {
        // Vector2[] uv = new Vector2[resolution * resolution];    //number of vertices
 
-        Vector2[] uv = mesh.uv; //Making sure it's not being overwritten
+        Vector2[] uv = mesh.uv; //Making sure it's not being overwritten, set them to be the existing UVs.
 
         for (int y = 0; y < resolution; y++)
         {
@@ -91,7 +91,7 @@ public class SphereSide
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
                 Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
 
-                uv[i].x = colorGenerator.BiomePercentFromPoint(pointOnUnitSphere); //making sure x of uvs is used for biomes to not overwrite
+                uv[i].x = colorGenerator.BiomePercentFromPoint(pointOnUnitSphere); //making sure x of uvs is used for biomes to not overwritethe y axis which is used for the ocean
             }
         }
         mesh.uv = uv;
