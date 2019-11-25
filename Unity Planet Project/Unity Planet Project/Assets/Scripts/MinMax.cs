@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//This Script was developed from scratch using online sources (https://www.youtube.com/playlist?list=PLFt_AvWsXl0cONs3T0By4puYy6GM22ko8) and changed to match the way maximum and minumum vectors are evaluated
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,19 +11,19 @@ public class MinMax
 
     public MinMax()
     {
-        Min = float.MaxValue;
-        Max = float.MinValue;
+        Min = float.MaxValue; 
+        Max = float.MinValue; 
     }
 
-    public void AddValue(float v)
+    public void AddValue(float vector)
     {
-        if (v > Max)
+        if (vector > Max)
         {
-            Max = v;
+            Max = vector;
         }
-        if (v < Min)
+        if (vector < Min)
         {
-            Min = v;
+            Min = vector;
         }
     }
 }
